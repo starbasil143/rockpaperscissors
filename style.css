@@ -1,0 +1,44 @@
+.mainContainer
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.choiceButton
+{
+    background: gray;
+    margin: 10px;
+    height: 30px;
+    width: 100px;
+}
+
+body
+{
+    background:rgb(61, 61, 61);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.message
+{
+    text-align: center;
+    color: rgb(218, 218, 218);
+}
+
+.results
+{
+    display:flex;
+    flex-direction:column;
+    align-self: center;
+    margin:10px;
+}
+
+.results>p
+{
+    color: rgb(218, 218, 218);
+    text-align: center;
+    margin: 2px;
+    
+}
