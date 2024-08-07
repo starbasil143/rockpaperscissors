@@ -1,5 +1,3 @@
-console.log("What do you want");
-
 function capitalizeFirstLetter(input)
 {
     return (input.charAt(0)).toUpperCase() + input.substr(1);
@@ -23,22 +21,6 @@ function getComputerChoice()
             return undefined;
     }
 }
-
-function getHumanChoice()
-{
-    let response = prompt('Rock, Paper, or Scissors?', '');
-    response = response.toLowerCase();
-    if (response == 'rock' || response == 'paper' || response == 'scissors')
-    {
-        return response;
-    }
-    else
-    {
-        alert(`Are you stupid. ${response} is not an option.`);
-    }
-}
-
-
 
 function playRound(humanChoice, computerChoice)
 {
@@ -64,32 +46,48 @@ function playRound(humanChoice, computerChoice)
     
     if (humanScore - tempHumanScore)
         {
-            console.log(`${capitalizeFirstLetter(humanChoice)} beats ${computerChoice}! You win this round!`);
+            messageSlot.textContent = (`${capitalizeFirstLetter(humanChoice)} beats ${computerChoice}! You win this round!`);
         }
     else if (computerScore - tempComputerScore)
         {
-            console.log(`${capitalizeFirstLetter(humanChoice)} loses to ${computerChoice}. You lose this round...`);
+            messageSlot.textContent = (`${capitalizeFirstLetter(humanChoice)} loses to ${computerChoice}. You lose this round...`);
         }
     else
         {
-            console.log(`${capitalizeFirstLetter(humanChoice)} and ${computerChoice}... A tie!`);
+            messageSlot.textContent = (`${capitalizeFirstLetter(humanChoice)} and ${computerChoice}... A tie!`);
         }
+    humanScoreDisplay.textContent = `Human: ${humanScore}`
+    computerScoreDisplay.textContent = `Computer: ${computerScore}`
+    if(humanScore >= 5)
+    {
+        humanScoreDisplay.textContent = `Human Wins! ${humanScore} - ${computerScore}`
+        computerScoreDisplay.textContent = '';
+        gameOver = true;
+    }
+    else if (computerScore >= 5)
+    {
+        humanScoreDisplay.textContent = `Computer Wins. ${humanScore} - ${computerScore}`
+        computerScoreDisplay.textContent = '';
+        gameOver = true;
+    }
 }
 
 
 let humanScore = 0;
 let computerScore = 0;
     
-function playGame()
-{
-    for (let i = 0; i < 5; i++)
-    {
-        playRound(getHumanChoice(),getComputerChoice());
-    }
+let gameOver = false;
 
-    alert(`Human: ${humanScore}. Computer: ${computerScore}. ${humanScore > computerScore ? 'Human wins!' : computerScore > humanScore ? 'Computer wins...' : 'A tie.'}`)
-}
+const buttons = document.querySelectorAll('.choiceButton');
+const messageSlot = document.querySelector('h3');
+const humanScoreDisplay = document.querySelector('#humanScoreDisplay');
+const computerScoreDisplay = document.querySelector('#computerScoreDisplay');
 
-
-
-playGame();
+buttons.forEach((currentButton)=>{
+    currentButton.addEventListener('click',()=>{
+        if(gameOver === false)
+        {
+            playRound((currentButton.textContent).toLowerCase(), getComputerChoice());
+        }
+    })
+})
